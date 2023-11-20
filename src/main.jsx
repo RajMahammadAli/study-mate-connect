@@ -1,0 +1,60 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Roots from "./Components/Roots/Roots.jsx";
+import Assignements from "./Components/Assignments/Assignements.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Register from "./Components/Register/Register.jsx";
+import SubmittedAssignments from "./Components/SubmittedAssignments/SubmittedAssignments.jsx";
+import Home from "./Components/Home/Home.jsx";
+import { ToastContainer } from "react-toastify";
+import AuthProvider from "./AuthProvider/AuthProvider.jsx";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Roots></Roots>,
+    children: [
+      { path: "/", element: <Home></Home> },
+      {
+        path: "/assignments",
+        element: <Assignements></Assignements>,
+      },
+      {
+        path: "/submitted-assignments",
+        element: (
+          <PrivateRoute>
+            <SubmittedAssignments></SubmittedAssignments>
+          </PrivateRoute>
+        ),
+      },
+
+      { path: "/logIn", element: <Login></Login> },
+
+      { path: "/register", element: <Register></Register> },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
+  </React.StrictMode>
+);
