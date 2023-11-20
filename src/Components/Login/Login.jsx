@@ -19,7 +19,6 @@ export default function () {
     const password = e.target.password.value;
     userSignIn(email, password)
       .then((result) => {
-        const user = result.user;
         e.target.reset();
 
         toast("Log In Successful", {

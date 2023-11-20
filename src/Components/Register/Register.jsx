@@ -1,7 +1,8 @@
-// RegisterPage.js
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RegisterPage() {
   const { createUser } = useContext(AuthContext);
@@ -15,6 +16,7 @@ export default function RegisterPage() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photoURL.value;
+    console.log(name, email, password, photoURL);
 
     // Password validation checks
     if (!/[!@#$%^&*]/.test(password)) {
@@ -35,10 +37,19 @@ export default function RegisterPage() {
     // Create user
     createUser(email, password, name, photoURL)
       .then((result) => {
-        const user = result.user;
         e.target.reset();
+        toast("Register Successful", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        console.log("Navigating to:", location?.state ? location.state : "/");
         navigate(location?.state ? location.state : "/");
-        console.log(user);
       })
       .catch((error) => console.log(error));
   };

@@ -12,6 +12,7 @@ import Home from "./Components/Home/Home.jsx";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "./AuthProvider/AuthProvider.jsx";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
+import CreatedAssignments from "./Components/CreatedAssignments/CreatedAssignments.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SubmittedAssignments></SubmittedAssignments>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/create-assignments",
+        element: (
+          <PrivateRoute>
+            <CreatedAssignments></CreatedAssignments>
           </PrivateRoute>
         ),
       },
