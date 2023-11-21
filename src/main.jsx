@@ -13,6 +13,8 @@ import { ToastContainer } from "react-toastify";
 import AuthProvider from "./AuthProvider/AuthProvider.jsx";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute.jsx";
 import CreatedAssignments from "./Components/CreatedAssignments/CreatedAssignments.jsx";
+import UpdateAssignments from "./Components/UpdateAssignments/UpdateAssignments.jsx";
+import ViewAssignments from "./Components/ViewAssaignments/ViewAssignments.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,12 +35,30 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/update-assignments/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateAssignments></UpdateAssignments>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/create-assignments",
         element: (
           <PrivateRoute>
             <CreatedAssignments></CreatedAssignments>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/view-assignments/:id",
+        element: (
+          <PrivateRoute>
+            <ViewAssignments></ViewAssignments>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/assignments/${params.id}`),
       },
 
       { path: "/logIn", element: <Login></Login> },
