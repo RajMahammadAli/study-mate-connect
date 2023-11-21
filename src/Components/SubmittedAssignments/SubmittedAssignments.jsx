@@ -1,8 +1,48 @@
-export default function () {
+import { useLoaderData, useNavigate } from "react-router-dom";
+import DisplayAssignments from "./displayAssignments";
+
+export default function SubmittedAssignmentsPage() {
+  const navigate = useNavigate();
+  const submittedAssignments = useLoaderData();
+  console.log(submittedAssignments);
+
+  const handleGiveMarkPage = () => {
+    console.log("ready to give mark");
+    navigate("giveMarkPage");
+  };
+
   return (
     <>
-      <div>
-        <h1>hello submitted assignments</h1>
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold underline my-8">
+          Submitted Assignments
+        </h1>
+
+        <div className="overflow-x-auto">
+          <table className="w-full bg-white border border-gray-300">
+            {/* head */}
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="px-4 py-2 sm:px-6 sm:py-3">SL. No.</th>
+                <th className="px-4 py-2 sm:px-6 sm:py-3">Title</th>
+                <th className="px-4 py-2 sm:px-6 sm:py-3">Marks</th>
+                <th className="px-4 py-2 sm:px-6 sm:py-3">Examinee Name</th>
+                <th className="px-4 py-2 sm:px-6 sm:py-3">Evaluate</th>
+                <th className="px-4 py-2 sm:px-6 sm:py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {submittedAssignments.map((items, idx) => (
+                <DisplayAssignments
+                  key={items._id}
+                  items={items}
+                  idx={idx}
+                  handleGiveMarkPage={handleGiveMarkPage}
+                ></DisplayAssignments>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

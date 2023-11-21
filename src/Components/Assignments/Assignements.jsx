@@ -8,10 +8,13 @@ export default function AssignmentsPage() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [assignments, setAssignments] = useState([]);
+  const [filteredAssignments, setFilteredAssignments] = useState([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("all");
 
   useEffect(() => {
     axios.get("http://localhost:5000/assignments").then((response) => {
       setAssignments(response.data);
+      setFilteredAssignments(response.data);
     });
   }, []);
 
@@ -78,17 +81,53 @@ export default function AssignmentsPage() {
     navigate(`/view-assignments/${id}`);
   };
 
+  const handleFilterAssignments = () => {
+    filterAssignments(selectedDifficulty);
+  };
+
+  const handleDifficultyChange = (e) => {
+    const difficulty = e.target.value;
+    setSelectedDifficulty(difficulty);
+  };
+
+  const filterAssignments = (difficulty) => {
+    if (difficulty === "all") {
+      setFilteredAssignments(assignments);
+    } else {
+      const filtered = assignments.filter(
+        (assignment) => assignment.difficultyLevel === difficulty
+      );
+      setFilteredAssignments(filtered);
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-3xl font-bold mb-4">Assignments</h2>
 
-      {assignments.length === 0 ? (
+      <div className="flex mb-4">
+        <label className="text-gray-700 mr-2">Filter by Difficulty:</label>
+        <select
+          className="select select-bordered mr-2"
+          onChange={handleDifficultyChange}
+        >
+          <option value="all">All</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button className="btn btn-primary" onClick={handleFilterAssignments}>
+          Filter Assignments
+        </button>
+      </div>
+
+      {filteredAssignments.length === 0 ? (
         <p className="text-center text-xl text-gray-500 mb-8">
           No assignments found. Go create some!
         </p>
       ) : (
         <div className="flex flex-wrap">
-          {assignments.map((assignment) => (
+          {filteredAssignments.map((assignment) => (
             <div
               key={assignment._id}
               className="bg-white p-4 rounded-md shadow-md m-2 transition-transform transform hover:scale-105"
@@ -105,7 +144,7 @@ export default function AssignmentsPage() {
                 Difficulty: {assignment.difficultyLevel}
               </p>
 
-              <div className="flex justify-between">
+              <div className="lg:flex justify-between overflow-none">
                 <button
                   onClick={() => handleViewAssignments(assignment._id)}
                   className="btn btn-primary"
@@ -119,6 +158,7 @@ export default function AssignmentsPage() {
                 >
                   Update Assignment
                 </button>
+                <br />
 
                 <button
                   onClick={() => handleDelete(assignment._id, assignment.email)}

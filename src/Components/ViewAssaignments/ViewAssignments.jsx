@@ -1,7 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export default function ViewAssignmentPage() {
   const assignment = useLoaderData();
+  const navigate = useNavigate();
+
+  const handleTakeAssignment = () => {
+    // Add your logic to handle taking the assignment
+    console.log("Taking assignment:", assignment.title);
+    // You can add additional logic or redirect the user to the assignment taking page
+    navigate(`/submit-assignments/${assignment._id}`);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -23,6 +31,10 @@ export default function ViewAssignmentPage() {
           alt={assignment.title}
           className="w-full h-40 object-cover mb-4 rounded-md"
         />
+
+        <button onClick={handleTakeAssignment} className="btn btn-primary">
+          Take Assignment
+        </button>
 
         {/* Additional details or buttons can be added as needed */}
       </div>
