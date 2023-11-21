@@ -3,9 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function () {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const email = user.email;
 
   const [startDate, setStartDate] = useState(new Date());
@@ -38,7 +41,7 @@ export default function () {
       .then((data) => {
         console.log(data);
         toast("Assignments added successfully");
-        navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/assignments");
       });
 
     console.log(assignmentData);
