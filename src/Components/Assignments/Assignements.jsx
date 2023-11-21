@@ -144,7 +144,7 @@ export default function AssignmentsPage() {
                 Difficulty: {assignment.difficultyLevel}
               </p>
 
-              <div className="lg:flex justify-between overflow-none">
+              <div className="lg:flex justify-between">
                 <button
                   onClick={() => handleViewAssignments(assignment._id)}
                   className="btn btn-primary"

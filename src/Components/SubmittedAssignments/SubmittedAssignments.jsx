@@ -6,9 +6,9 @@ export default function SubmittedAssignmentsPage() {
   const submittedAssignments = useLoaderData();
   console.log(submittedAssignments);
 
-  const handleGiveMarkPage = () => {
-    console.log("ready to give mark");
-    navigate("giveMarkPage");
+  const handleGiveMarkPage = (id) => {
+    console.log("ready to give mark", id);
+    navigate(`/giveMarkPage/${id}`);
   };
 
   return (

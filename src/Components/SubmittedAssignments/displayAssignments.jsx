@@ -8,7 +8,10 @@ export default function ({ items, idx, handleGiveMarkPage }) {
         <td>{items.marks}</td>
         <td>{items.examineeName}</td>
         <th>
-          <button onClick={handleGiveMarkPage} className="btn btn-ghost btn-xs">
+          <button
+            onClick={() => handleGiveMarkPage(items._id)}
+            className="btn btn-ghost btn-xs"
+          >
             Give a mark
           </button>
         </th>
