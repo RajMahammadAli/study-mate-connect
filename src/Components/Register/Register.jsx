@@ -48,8 +48,11 @@ export default function RegisterPage() {
           progress: undefined,
           theme: "light",
         });
-        console.log("Navigating to:", location?.state ? location.state : "/");
+
         navigate(location?.state ? location.state : "/");
+      })
+      .then(() => {
+        window.location.reload();
       })
       .catch((error) => console.log(error));
   };

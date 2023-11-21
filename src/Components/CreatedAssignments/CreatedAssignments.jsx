@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
 
 export default function () {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,19 @@ export default function () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    fetch(`http://localhost:5000/assignments`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(assignmentData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast("Assignments added successfully");
+        navigate(location?.state ? location.state : "/");
+      });
+
     console.log(assignmentData);
   };
   return (
