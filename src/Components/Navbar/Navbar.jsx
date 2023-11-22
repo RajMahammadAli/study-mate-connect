@@ -39,6 +39,9 @@ const Navbar = () => {
             <Link to="/submitted-assignments" className="text-white">
               Submitted Assignments
             </Link>
+            <Link to="/my-assignment-page" className="text-white">
+              My Assignment Page
+            </Link>
             {/* User Image */}
             <div className="relative group">
               <img
