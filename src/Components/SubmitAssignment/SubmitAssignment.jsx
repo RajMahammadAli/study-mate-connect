@@ -29,6 +29,11 @@ export default function SubmitAssignmentPage() {
       toast.error("Please fill in all the required fields.");
       return;
     }
+
+    if (!isValidPdfLink(pdfLink)) {
+      toast.error("Invalid PDF link. Please enter a valid PDF link.");
+      return;
+    }
     // Add your logic for submitting the assignment to MongoDB
     const formData = {
       pdfLink: pdfLink,
@@ -58,6 +63,12 @@ export default function SubmitAssignmentPage() {
         console.error("Error submitting assignment:", error);
         // Handle error if needed
       });
+  };
+
+  const isValidPdfLink = (link) => {
+    // You can implement a more sophisticated validation based on your requirements
+    // This is a simple example that checks if the link ends with ".pdf"
+    return link.toLowerCase().endsWith(".pdf");
   };
 
   return (
