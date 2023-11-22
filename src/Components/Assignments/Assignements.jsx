@@ -11,6 +11,9 @@ export default function AssignmentsPage() {
   const [filteredAssignments, setFilteredAssignments] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // You can adjust this based on your preference
+
   useEffect(() => {
     axios.get("http://localhost:5000/assignments").then((response) => {
       setAssignments(response.data);
@@ -101,6 +104,42 @@ export default function AssignmentsPage() {
     }
   };
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredAssignments.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(filteredAssignments.length / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const renderPagination = () => {
+    const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+    return (
+      <nav className=" mt-4">
+        <ul className="pagination flex justify-center gap-2">
+          {pages.map((page) => (
+            <li key={page}>
+              <button
+                className={`${
+                  page === currentPage ? "btn btn-primary" : "btn btn-secondary"
+                }`}
+                onClick={() => handlePageChange(page)}
+              >
+                {page}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-3xl font-bold mb-4">Assignments</h2>
@@ -121,13 +160,13 @@ export default function AssignmentsPage() {
         </button>
       </div>
 
-      {filteredAssignments.length === 0 ? (
+      {currentItems.length === 0 ? (
         <p className="text-center text-xl text-gray-500 mb-8">
           No assignments found. Go create some!
         </p>
       ) : (
-        <div className="flex flex-wrap">
-          {filteredAssignments.map((assignment) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {currentItems.map((assignment) => (
             <div
               key={assignment._id}
               className="bg-white p-4 rounded-md shadow-md m-2 transition-transform transform hover:scale-105"
@@ -171,6 +210,8 @@ export default function AssignmentsPage() {
           ))}
         </div>
       )}
+
+      {renderPagination()}
     </div>
   );
 }

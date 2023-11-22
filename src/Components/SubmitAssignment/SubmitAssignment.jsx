@@ -10,9 +10,10 @@ export default function SubmitAssignmentPage() {
   const navigate = useNavigate();
   const [pdfLink, setPdfLink] = useState("");
   const [quickNote, setQuickNote] = useState("");
+
   const email = user.email;
   const examineeName = user.displayName;
-  console.log(user.displayName);
+  console.log(pdfLink);
 
   const {
     title,
