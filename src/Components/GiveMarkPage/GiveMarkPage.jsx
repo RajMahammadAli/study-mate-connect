@@ -1,9 +1,49 @@
-import { useLoaderData } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function GiveMarkPage() {
+  const navigate = useNavigate();
+  const id = useParams();
+  const [assignment, setAssignment] = useState({ status: "completed" });
   const submitSingleAssignment = useLoaderData();
-  console.log(submitSingleAssignment.pdfLink);
+  console.log(submitSingleAssignment.status);
 
+  console.log(assignment);
+
+  //   const status = "completed";
+  //   setAssignment({ ...assignment, status });
+
+  // useEffect(() => {
+  //   axios.get(`localhost:5000/submitAssignments/${id}`).then((response) => {
+  //     const assignmentData = response.data;
+  //     console.log(assignmentData);
+  //     setAssignment({
+  //       status: assignmentData.status,
+  //     });
+  //   });
+  // }, [id]);
+
+  const handleGiveMark = (id) => {
+    console.log("Hello world");
+
+    // Set the status property of the assignment object
+
+    axios
+      .put(`http://localhost:5000/submitAssignments/${id}`, assignment)
+      .then((response) => {
+        console.log("Assignment updated:", response.data);
+
+        setTimeout(() => {
+          toast("Assignments marks given successfully");
+          navigate(location?.state ? location.state : "/");
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Error updating assignment:", error);
+      });
+  };
   return (
     <>
       <div className="container mx-auto p-4">
@@ -23,7 +63,7 @@ export default function GiveMarkPage() {
           {/* Description */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Description
+              Note Submitted by Examinee
             </label>
             <p>{submitSingleAssignment.quickNote}</p>
           </div>
@@ -60,6 +100,7 @@ export default function GiveMarkPage() {
               type="button"
               className="btn btn-primary"
               // Add onClick handler to submit data
+              onClick={() => handleGiveMark(submitSingleAssignment._id)}
             >
               Submit
             </button>

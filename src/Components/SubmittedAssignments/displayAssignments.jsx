@@ -1,5 +1,4 @@
 export default function ({ items, idx, handleGiveMarkPage }) {
-  console.log(items);
   return (
     <>
       <tr>

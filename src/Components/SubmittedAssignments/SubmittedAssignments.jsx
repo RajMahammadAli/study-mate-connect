@@ -4,7 +4,10 @@ import DisplayAssignments from "./displayAssignments";
 export default function SubmittedAssignmentsPage() {
   const navigate = useNavigate();
   const submittedAssignments = useLoaderData();
-  console.log(submittedAssignments);
+  const pendingAssignments = submittedAssignments.find(
+    (items) => items.status === "completed"
+  );
+  console.log(pendingAssignments);
 
   const handleGiveMarkPage = (id) => {
     console.log("ready to give mark", id);
