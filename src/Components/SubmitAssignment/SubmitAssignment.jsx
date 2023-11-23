@@ -53,7 +53,10 @@ export default function SubmitAssignmentPage() {
 
     // Example: Post data to MongoDB
     axios
-      .post("http://localhost:5000/submitAssignments", formData)
+      .post(
+        "https://online-group-study-server-side-one.vercel.app/submitAssignments",
+        formData
+      )
       .then((response) => {
         console.log("Assignment submitted successfully:", response.data);
         // Add any additional logic, such as showing a success message or redirecting

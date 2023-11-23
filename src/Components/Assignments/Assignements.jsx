@@ -15,10 +15,12 @@ export default function AssignmentsPage() {
   const itemsPerPage = 5; // You can adjust this based on your preference
 
   useEffect(() => {
-    axios.get("http://localhost:5000/assignments").then((response) => {
-      setAssignments(response.data);
-      setFilteredAssignments(response.data);
-    });
+    axios
+      .get("https://online-group-study-server-side-one.vercel.app/assignments")
+      .then((response) => {
+        setAssignments(response.data);
+        setFilteredAssignments(response.data);
+      });
   }, []);
 
   const handleDelete = (assignmentId, assignmentEmail) => {
@@ -35,9 +37,12 @@ export default function AssignmentsPage() {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/assignments/${assignmentId}`, {
-            method: "DELETE",
-          })
+          fetch(
+            `https://online-group-study-server-side-one.vercel.app/assignments/${assignmentId}`,
+            {
+              method: "DELETE",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log(data);

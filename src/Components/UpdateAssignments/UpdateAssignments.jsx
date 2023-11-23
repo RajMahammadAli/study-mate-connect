@@ -17,7 +17,10 @@ export default function UpdateAssignmentPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/assignments/${id}`, { withCredentials: true })
+      .get(
+        `https://online-group-study-server-side-one.vercel.app/assignments/${id}`,
+        { withCredentials: true }
+      )
       .then((response) => {
         const assignmentData = response.data;
         setAssignment({
@@ -37,7 +40,10 @@ export default function UpdateAssignmentPage() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:5000/assignments/${id}`, assignment)
+      .put(
+        `https://online-group-study-server-side-one.vercel.app/assignments/${id}`,
+        assignment
+      )
       .then((response) => {
         console.log("Assignment updated:", response.data);
 

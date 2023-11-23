@@ -32,7 +32,7 @@ export default function () {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/assignments`, {
+    fetch(`https://online-group-study-server-side-one.vercel.app/assignments`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(assignmentData),

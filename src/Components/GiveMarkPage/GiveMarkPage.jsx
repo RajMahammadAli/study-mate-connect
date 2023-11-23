@@ -20,9 +20,13 @@ export default function GiveMarkPage() {
     console.log("Hello world");
 
     axios
-      .put(`http://localhost:5000/submitAssignments/${id}`, assignment, {
-        withCredentials: true,
-      })
+      .put(
+        `https://online-group-study-server-side-one.vercel.app/submitAssignments/${id}`,
+        assignment,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log("Assignment updated:", response.data);
 
