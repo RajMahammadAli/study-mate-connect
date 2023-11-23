@@ -1,14 +1,5 @@
 import React from "react";
-
-const Feature = ({ icon, title, description }) => {
-  return (
-    <div className="flex flex-col items-center p-4 sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <div className="bg-blue-500 rounded-full p-3 mb-4">{icon}</div>
-      <h3 className="text-lg sm:text-xl font-bold mb-2">{title}</h3>
-      <p className="text-gray-600 text-sm text-center">{description}</p>
-    </div>
-  );
-};
+import Feature from "./Feature";
 
 const Features = () => {
   const featuresData = [
@@ -47,18 +38,16 @@ const Features = () => {
   ];
 
   return (
-    <section className="bg-gray-100 py-8 sm:py-16">
-      <div className="container mx-auto">
-        <h2 className="text-2xl sm:text-4xl font-bold text-center mb-8">
-          Key Features
-        </h2>
-        <div className="flex flex-wrap -mx-4 justify-center">
-          {featuresData.map((feature) => (
-            <Feature key={feature.id} {...feature} />
-          ))}
-        </div>
+    <div className="container my-8 mx-auto ">
+      <h2 className="text-2xl sm:text-4xl font-bold text-center mb-8">
+        Key Features
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {featuresData.map((feature) => (
+          <Feature key={feature.id} {...feature} />
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 

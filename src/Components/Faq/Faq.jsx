@@ -1,5 +1,3 @@
-// Accordion.js
-
 import React, { useState } from "react";
 
 const AccordionItem = ({ question, answer }) => {
@@ -66,11 +64,11 @@ const Accordion = () => {
   ];
 
   return (
-    <section className="container mx-auto py-16">
+    <section className="container mx-auto py-8 sm:py-16">
       <h2 className="text-4xl font-bold text-center mb-8">
         Frequently Asked Questions
       </h2>
-      <div className="max-w-md mx-auto">
+      <div className="mx-4 sm:mx-auto max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
         {accordionData.map((item) => (
           <AccordionItem key={item.id} {...item} />
         ))}
