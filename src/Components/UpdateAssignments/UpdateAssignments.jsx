@@ -16,19 +16,21 @@ export default function UpdateAssignmentPage() {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/assignments/${id}`).then((response) => {
-      const assignmentData = response.data;
-      setAssignment({
-        title: assignmentData.title,
-        description: assignmentData.description,
-        marks: assignmentData.marks,
-        thumbnailImageUrl: assignmentData.thumbnailImageUrl,
-        difficultyLevel: assignmentData.difficultyLevel,
-        dueDate: assignmentData.dueDate
-          ? new Date(assignmentData.dueDate)
-          : new Date(),
+    axios
+      .get(`http://localhost:5000/assignments/${id}`, { withCredentials: true })
+      .then((response) => {
+        const assignmentData = response.data;
+        setAssignment({
+          title: assignmentData.title,
+          description: assignmentData.description,
+          marks: assignmentData.marks,
+          thumbnailImageUrl: assignmentData.thumbnailImageUrl,
+          difficultyLevel: assignmentData.difficultyLevel,
+          dueDate: assignmentData.dueDate
+            ? new Date(assignmentData.dueDate)
+            : new Date(),
+        });
       });
-    });
   }, [id]);
 
   const handleUpdate = (e) => {
