@@ -18,9 +18,3 @@ Explore Study Mate Connect: [Study Mate Connect Live](https://study-mate-connect
 - Firebase
 - MongoDB
 - Vercel
-
-### Getting Started
-To run the project locally, follow these steps:
-1. Clone the repository: `git clone https://github.com/your-username/study-mate-connect.git`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm start`
