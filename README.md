@@ -1,8 +1,26 @@
-# Study Mate Connect
+## 🎓 Study Mate Connect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Study Mate Connect is a feature-rich web application developed using React.js, Tailwind CSS, DaisyUI, Firebase, MongoDB, and hosted on Vercel. The platform enables users to engage in assignments hosted by their peers, read educational blogs, and manage assignments by posting, editing, and grading submissions.
 
-Currently, two official plugins are available:
+### Live Demo
+Explore Study Mate Connect: [Study Mate Connect Live](https://study-mate-connect.firebaseapp.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Key Features
+- Assignment Participation
+- Blog Reading
+- Assignment Management (Post, Edit, Delete)
+- Peer Grading System
+
+### Technologies Used
+- React.js
+- Tailwind CSS
+- DaisyUI
+- Firebase
+- MongoDB
+- Vercel
+
+### Getting Started
+To run the project locally, follow these steps:
+1. Clone the repository: `git clone https://github.com/your-username/study-mate-connect.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
